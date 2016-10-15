@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Inventory App Javascript</title>
+
+	<link rel="import" href="product-tenplate.html">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+
+<body ng-app="InventoryApp">	
+
+<div class="wrapAll" ng-controller="MainCtrl">
+
+	<div class="nav-side-menu">
+	    <div class="brand">Squish Flabs</div>
+	    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content" ></i>
+	  
+    	
+        <ul class=" menu-content" id="accordion1">
+
+            <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#firstLink" ng-click="tabName='Products'"> Products
+                <ul id="firstLink" class="sub-menu collapse">
+                    <li data-toggle="modal" data-target="#productModal">Add Product</li>
+                    <li data-toggle="modal" 
+                    data-target="#mergeModal">Merge Products</li>
+                </ul>
+            </li>
+
+            <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#secondLink" ng-click="tabName='Orders'"> Orders
+                <ul id="secondLink" class="sub-menu collapse">
+                    <li>Create Order</li>
+                </ul>
+            </li>
+
+            <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#thirdLink" ng-click="tabName='Contacts'"> Contacts
+                <ul id="thirdLink" class="sub-menu collapse">
+                    <li>Add Contact</li>
+                </ul>
+            </li>
+
+        </ul>
+	</div>
+
+	<div class="content">
+		<div class="contentHeader" ng-bind="tabName">
+
+		</div>
+		<div class="contentWrapper" ng-switch="tabName">
+
+			<div ng-controller="ProductListCtrl" ng-switch-when="Products">
+				<column-headers dataset="header"></column-headers>
+				<div id="inventoryList" ng-repeat="product in products">
+					<product-line-items dataset="product"></product-line-items>
+				</div>
+			</div>	
+
+			<div ng-controller="OrderListCtrl" ng-switch-when="Orders">
+				<column-headers dataset="header"></column-headers>
+				<div ng-repeat="order in orders">
+					
+					<order-line-items dataset="order"></order-line-items>
+					
+				</div>
+			</div>
+		
+			<div ng-controller="ContactListCtrl" ng-switch-when="Contacts">
+				<column-headers dataset="header"></column-headers>
+				<div ng-repeat="contact in contacts">
+					
+					<contact-line-items dataset="contact"></contact-line-items>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- ADD PRODUCT MODAL -->
+
+			<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Add Products</h4>
+			      </div>
+			      <form class="form-group" ng-submit="productAdd()">
+				      <div class="modal-body">
+						<div class="form-group">
+							<input type="text" ng-model="newProd.name" class="form-control" placeholder="Product Name" autofocus="">
+						</div>
+						<div class="form-group">
+							<input type="text" ng-model="newProd.price" class="form-control" placeholder="Price">
+						</div>
+						<div class="form-group">
+							<input type="tel" ng-model="newProd.img" class="form-control" placeholder="Add Image (must be hosted URL)">
+						</div>
+				      </div>
+
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					    <input type="submit" value="Save" class="btn btn-primary"></input>
+				      </div>
+			       	</form>
+			    </div>
+			  </div>
+			</div>
+
+
+
+<!-- ORDER MODALS -->
+
+
+<!-- 			<div ng-controller='ViewOrder' class='modal fade' id='viewOrderModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+			  <div class='modal-dialog' role='document'>
+			    <div class='modal-content'>
+			      <div class='modal-header'>
+			        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+			        <h4 class='modal-title' id='myModalLabel'>Order</h4>
+			      </div>
+				      <div class='modal-body'>
+
+				      </div>
+
+				      <div class='modal-footer'>
+				        <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+					    <input type='submit' value='Save' class='btn btn-primary'></input>
+				      </div>
+			    </div>
+			  </div>
+			</div> -->
+
+
+
+			<div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Add Products</h4>
+			      </div>
+			      <form class="form-group" ng-submit="productAdd()">
+				      <div class="modal-body">
+						<div class="form-group">
+							<input type="text" ng-model="newProd.name" class="form-control" placeholder="Product Name" autofocus="">
+						</div>
+						<div class="form-group">
+							<input type="text" ng-model="newProd.price" class="form-control" placeholder="Price">
+						</div>
+						<div class="form-group">
+							<input type="tel" ng-model="newProd.img" class="form-control" placeholder="Add Image (must be hosted URL)">
+						</div>
+				      </div>
+
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					    <input type="submit" value="Save" class="btn btn-primary"></input>
+				      </div>
+			       	</form>
+			    </div>
+			  </div>
+			</div>
+
+
+	<!-- MERGE MODAL -->
+<!-- 			<div class="modal fade" id="mergeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Merge Products</h4>
+			      </div>
+			      <form class="form-group" ng-submit="productAdd()">
+				      <div class="modal-body">
+						<div class="form-group">
+							<input type="text" ng-model="newProd.name" class="form-control" placeholder="Product Name" autofocus="">
+						</div>
+						<div class="form-group">
+							<input type="text" ng-model="newProd.price" class="form-control" placeholder="Price">
+						</div>
+						<div class="form-group">
+							<input type="tel" ng-model="newProd.img" class="form-control" placeholder="Add Image (must be hosted URL)">
+						</div>
+				      </div>
+				      
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					    <input type="submit" value="Save" class="btn btn-primary"></input>
+				      </div>
+			       	</form>
+			    </div>
+			  </div>
+			</div> -->
+
+
+</div>
+
+
+
+
+
+
+<!-- <div class="menu-list">
+
+<ul class="menu-content" id="accordion">
+
+    <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#firstLink"  ng-click="tabName='tab1'">
+			Products 
+    </li>
+	<ul id="firstLink" class="sub-menu collapse">
+      <li>Add Contacts</li>
+      <li>New Service 2</li>
+      <li>New Service 3</li>
+    </ul>
+
+
+    <li class="panel active" data-toggle="collapse" data-target="#fourthLink" data-parent="#accordion"  ng-click="tabName='tab2'">
+      <a>Orders <span class="arrow"></span></a>
+
+    </li>  
+    <ul class="sub-menu collapse" id="fourthLink">
+      <li>Add Contacts</li>
+      <li>New Service 2</li>
+      <li>New Service 3</li>
+    </ul>
+
+
+    <li class="panel active" data-toggle="collapse" data-target="#fifthLink" data-parent="#accordion"  ng-click="tabName='tab3'">
+      <a href="#"><i class="fa fa-car fa-lg"></i> Contacts <span class="arrow"></span></a>
+    </li>
+    <ul class="sub-menu collapse" id="fifthLink">
+      <li>New New 1</li>
+      <li>New New 2</li>
+      <li>New New 3</li>
+    </ul>
+</ul>
+</div> -->
+
+<!-- SCRIPT -->
+
+	<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>	
+	
+</body>
+</html>
