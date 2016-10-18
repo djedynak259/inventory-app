@@ -7,7 +7,7 @@ angular.module("InventoryApp", [])
 	$scope.productAdd = function () {
 		ProductList.push($scope.newProd);
 		$scope.newProd = {};
-	}
+	};
 })
 	
 .controller('ProductListCtrl', function($scope, ProductList, Headers){
@@ -59,7 +59,7 @@ angular.module("InventoryApp", [])
 	function controller($scope ) {
 			$scope.view = function(item) {
 			console.log(item);
-		}
+		};
 	}
 
   return { 
@@ -125,7 +125,7 @@ angular.module("InventoryApp", [])
 			price: 10,
 			img: "img/box.png"
 		}
-	]
+	];
 })
 
 .factory('OrderList', function(){
@@ -145,7 +145,7 @@ angular.module("InventoryApp", [])
 			contact: "billllll",
 			price: 404
 		}
-	]
+	];
 })
 
 .factory('ContactList', function(){
@@ -165,7 +165,7 @@ angular.module("InventoryApp", [])
 			email: 'some@thing.com',
 			address: "589 Clementina Blvd"
 		}
-	]
+	];
 })
 
 .factory('Headers', function(){
@@ -185,13 +185,13 @@ angular.module("InventoryApp", [])
 		col_1: "Number",
 		col_2: "Contact",
 		col_3: "Price"
-	}				
+	};
 
 	return {
 			productHeaders: productHeaders,
 			contactHeaders: contactHeaders,
 			orderHeaders: orderHeaders
-			}
+			};
 		
 	}					
 )
