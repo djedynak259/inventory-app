@@ -21,7 +21,7 @@
     	
         <ul class=" menu-content" id="accordion1">
 
-            <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#firstLink" ui-sref="products"> Products
+            <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#firstLink" ng-click="tabName='Products'"> Products
                 <ul id="firstLink" class="sub-menu collapse">
                     <li data-toggle="modal" data-target="#productModal">Add Product</li>
                     <li data-toggle="modal" 
@@ -29,13 +29,13 @@
                 </ul>
             </li>
 
-            <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#secondLink" ui-sref="orders"> Orders
+            <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#secondLink" ng-click="tabName='Orders'"> Orders
                 <ul id="secondLink" class="sub-menu collapse">
                     <li>Create Order</li>
                 </ul>
             </li>
 
-            <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#thirdLink" ui-sref="contacts"> Contacts
+            <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#thirdLink" ng-click="tabName='Contacts'"> Contacts
                 <ul id="thirdLink" class="sub-menu collapse">
                     <li>Add Contact</li>
                 </ul>
@@ -44,7 +44,38 @@
         </ul>
 	</div>
 
-	<ui-view></ui-view>
+	<div class="content">
+		<div class="contentHeader" ng-bind="tabName">
+
+		</div>
+		<div class="contentWrapper" ng-switch="tabName">
+
+			<div ng-controller="ProductListCtrl" ng-switch-when="Products">
+				<column-headers dataset="header"></column-headers>
+				<div id="inventoryList" ng-repeat="product in products">
+					<product-line-items dataset="product"></product-line-items>
+				</div>
+			</div>	
+
+			<div ng-controller="OrderListCtrl" ng-switch-when="Orders">
+				<column-headers dataset="header"></column-headers>
+				<div ng-repeat="order in orders">
+					
+					<order-line-items dataset="order"></order-line-items>
+					
+				</div>
+			</div>
+		
+			<div ng-controller="ContactListCtrl" ng-switch-when="Contacts">
+				<column-headers dataset="header"></column-headers>
+				<div ng-repeat="contact in contacts">
+					
+					<contact-line-items dataset="contact"></contact-line-items>
+					
+				</div>
+			</div>
+		</div>
+	</div>
 
 <!-- ADD PRODUCT MODAL -->
 
@@ -168,30 +199,9 @@
 
 <!-- SCRIPT -->
 
-<!-- FIREBASE -->
-
-	<script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
-	<script>
-	  // Initialize Firebase
-	  var config = {
-	    apiKey: "AIzaSyBzCYwhtDgWMxumMGIm6lYK52p5niICMzE",
-	    authDomain: "project1-8a938.firebaseapp.com",
-	    databaseURL: "https://project1-8a938.firebaseio.com",
-	    storageBucket: "project1-8a938.appspot.com",
-	    messagingSenderId: "833640241296"
-	  };
-	  firebase.initializeApp(config);
-	</script>
-
-	<script src="https://www.gstatic.com/firebasejs/3.5.0/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/3.5.0/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/3.5.0/firebase-database.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/3.5.0/firebase-messaging.js"></script>
-
-<!-- OTHER -->
-
 	<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 
+	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
 	<script data-require="ui-router@*" data-semver="1.0.0-beta.2" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.0-beta.2/angular-ui-router.js"></script>

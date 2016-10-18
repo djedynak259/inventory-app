@@ -1,7 +1,35 @@
 
-angular.module("InventoryApp", [])
+angular.module("InventoryApp", [
+	'ui.router'
+])
+
+.config(function($stateProvider) {
+  $stateProvider.state({
+    name: 'products',
+    url: '/products',
+    templateUrl: 'templates/products.html'
+  })
+  .state({
+    name: 'orders',
+    url: '/orders',
+    templateUrl: 'templates/orders.html'
+  })
+  .state({
+    name: 'contacts',
+    // controller: 'ContactController',
+    url: '/contact?id&something&new',
+    templateUrl: 'templates/contacts.html'
+  })
+  .state({
+    name: 'contact.create',
+    url: '/create',
+    template: '<h3>Nested Contact</h3>'
+  })
+})
+
 
 .controller('MainCtrl', function ($scope, ProductList) {
+	var database = firebase.database();
 	$scope.tabName = "Products";
 
 	$scope.productAdd = function () {
@@ -39,7 +67,7 @@ angular.module("InventoryApp", [])
     scope: { 
       dataset: '=' 
     }, 
-    template: "<div class='tableHeader row'><div class='col-xs-4'>{{ dataset.col_1 }}</div><div class='col-xs-4'>{{ dataset.col_2 }}</div><div class=' col-xs-4'>{{ dataset.col_3 }}</div></div>" 
+    templateUrl: "templates/column-headers.html"
 	}; 
 })
 
@@ -49,8 +77,7 @@ angular.module("InventoryApp", [])
     scope: { 
       dataset: '=' 
     }, 
-    // templateUrl: 'product-template.html'
-    template: "<div class='tableLine row'><div class='col-xs-4'><img class='iconWrap' ng-src='{{ dataset.img }}'></div><p class='col-xs-4'>{{ dataset.name }}</p><p class=' col-xs-4'>{{ dataset.price | currency }}</p></div>" 
+    templateUrl: 'templates/product-line-items.html'
 	}; 
 })
 
@@ -69,25 +96,7 @@ angular.module("InventoryApp", [])
       view: '&' 
     }, 
     controller: controller,
-    // templateUrl: 'product-template.html'
-    template: "<div class='tableLine row' data-toggle='modal' data-target='#viewOrderModal' ng-click='view(dataset)'><p class='col-xs-4'>{{ dataset.number }}</p><p class='col-xs-4'>{{ dataset.contact }}</p><p class=' col-xs-4'>{{ dataset.price | currency }}</p></div>" +
-    			"<div class='modal fade' id='viewOrderModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>" +
-			  "<div class='modal-dialog' role='document'>" +
-			    "<div class='modal-content'>" +
-			      "<div class='modal-header'>" +
-			        "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
-			        "<h4 class='modal-title' id='myModalLabel'>Order</h4>" +
-			      "</div>" +
-				      "<div class='modal-body'>" +
-				      "{{dataset}}"+
-				      "</div>" +
-
-				      "<div class='modal-footer'>" +
-				        "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>" +
-				      "</div>" +
-			    "</div>" +
-			  "</div>" +
-			"</div>"
+    templateUrl: 'templates/order-line-items.html'
 	}; 
 })
 
@@ -98,8 +107,7 @@ angular.module("InventoryApp", [])
     scope: { 
       dataset: '=' 
     }, 
-    // templateUrl: 'product-template.html'
-    template: "<div class='tableLine row'><p class='col-xs-4'>{{ dataset.name }}</p><p class='col-xs-4'>{{ dataset.email }}</p><p class=' col-xs-4'>{{ dataset.address }}</p></div>" 
+    templateUrl: 'templates/contact-line-items.html'
 	}; 
 })
 
