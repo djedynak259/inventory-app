@@ -29,8 +29,8 @@ angular.module("InventoryApp", [
 
 
 .controller('MainCtrl', function ($scope, ProductList) {
-	var database = firebase.database();
-	$scope.tabName = "Products";
+
+	// $scope.tabName = "Products";
 
 	$scope.productAdd = function () {
 		ProductList.push($scope.newProd);
@@ -47,7 +47,7 @@ angular.module("InventoryApp", [
 .controller('OrderListCtrl', function($scope, OrderList, Headers){
 	$scope.orders = OrderList;
 	$scope.header = Headers.orderHeaders;
-	// $scope.view = function(item) {		
+	// $scope.view = function(item) {
 	// 	console.log(item);
 	// }
 })
