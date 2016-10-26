@@ -6,10 +6,13 @@
 
 	<title>Inventory App Javascript</title>
 
+	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-</head>
 
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+</head>
+		
 <body ng-app="InventoryApp">	
 
 <div class="wrapAll" ng-controller="MainCtrl">
@@ -19,9 +22,9 @@
 	    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content" ></i>
 	  
     	
-        <ul class=" menu-content" id="accordion1">
+        <ul class=" menu-content" id="accordion">
 
-            <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#firstLink" ui-sref="products"> Products
+            <li class="panel active" data-toggle="collapse" data-parent="#accordion" data-target="#firstLink" ui-sref="products"> Products
                 <ul id="firstLink" class="sub-menu collapse">
                     <li data-toggle="modal" data-target="#productModal">Add Product</li>
                     <li data-toggle="modal" 
@@ -29,13 +32,13 @@
                 </ul>
             </li>
 
-            <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#secondLink" ui-sref="orders"> Orders
+            <li class="panel active" data-toggle="collapse" data-parent="#accordion" data-target="#secondLink" ui-sref="orders"> Orders
                 <ul id="secondLink" class="sub-menu collapse">
                     <li>Create Order</li>
                 </ul>
             </li>
 
-            <li class="panel active" data-toggle="collapse" data-parent="#accordion1" href="#thirdLink" ui-sref="contacts"> Contacts
+            <li class="panel active" data-toggle="collapse" data-parent="#accordion" data-target="#thirdLink" ui-sref="contacts"> Contacts
                 <ul id="thirdLink" class="sub-menu collapse">
                     <li>Add Contact</li>
                 </ul>
@@ -174,8 +177,11 @@
 	<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
-	<script data-require="ui-router@*" data-semver="1.0.0-beta.2" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.0-beta.2/angular-ui-router.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+
 	<script type="text/javascript" src="js/main.js"></script>	
 	
 </body>
