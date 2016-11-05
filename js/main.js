@@ -1,4 +1,3 @@
-
 angular.module("InventoryApp", [
 	'ui.router'
 ])
@@ -19,11 +18,6 @@ angular.module("InventoryApp", [
     // controller: 'ContactController',
     url: '/contact?id&something&new',
     templateUrl: 'templates/contacts.html'
-  })
-  .state({
-    name: 'contact.create',
-    url: '/create',
-    template: '<h3>Nested Contact</h3>'
   })
 })
 
