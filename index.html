@@ -40,7 +40,7 @@
 
             <li class="panel active" data-toggle="collapse" data-parent="#accordion" data-target="#thirdLink" ui-sref="contacts"> Contacts
                 <ul id="thirdLink" class="sub-menu collapse">
-                    <li>Add Contact</li>
+                    <li data-toggle="modal" data-target="#contactModal">Add Contact</li>
                 </ul>
             </li>
 
@@ -80,6 +80,38 @@
 			  </div>
 			</div>
 
+
+<!-- ADD CONTACT MODAL -->
+
+
+			<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Add Contacts</h4>
+			      </div>
+			      <form class="form-group" ng-submit="contactAdd()">
+				      <div class="modal-body">
+						<div class="form-group">
+							<input type="text" ng-model="newcontact.name" class="form-control" placeholder="Contact Name" autofocus="">
+						</div>
+						<div class="form-group">
+							<input type="text" ng-model="newcontact.email" class="form-control" placeholder="Email">
+						</div>
+						<div class="form-group">
+							<input type="tel" ng-model="newcontact.address" class="form-control" placeholder="Address">
+						</div>
+				      </div>
+
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					    <input type="submit" value="Save" class="btn btn-primary"></input>
+				      </div>
+			       	</form>
+			    </div>
+			  </div>
+			</div>
 
 
 <!-- ORDER MODALS -->

@@ -22,13 +22,20 @@ angular.module("InventoryApp", [
 })
 
 
-.controller('MainCtrl', function ($scope, ProductList) {
+.controller('MainCtrl', function ($scope, ProductList, ContactList) {
 
 	// $scope.tabName = "Products";
 
 	$scope.productAdd = function () {
+		console.log('test');
 		ProductList.push($scope.newProd);
 		$scope.newProd = {};
+
+	$scope.contactAdd = function() {
+		console.log('test');
+		ContactList.push($scope.newcontact);
+		$scope.newcontact = {};
+	}
 	};
 })
 	
